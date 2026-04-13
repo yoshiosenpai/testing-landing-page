@@ -1,0 +1,1543 @@
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+<style type="text/css">/* ============================================
+   CSS VARIABLES & RESET (scoped)
+   ============================================ */
+.cytron-md-page {
+    position: relative;
+    --primary: #00A5DC;
+    --primary-dark: #0090c0;
+    --primary-glow: rgba(0,165,220,0.30);
+    --bg: #ffffff;
+    --bg-alt: #F6F7F9;
+    --text: #111827;
+    --text-secondary: #4B5563;
+    --text-muted: #9CA3AF;
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --card-from: #ffffff;
+    --card-to: #ffffff;
+    --badge-bg: #f3f4f6;
+    --badge-text: #374151;
+    --hero-gradient: linear-gradient(135deg, #dbeeff 0%, #e8f4ff 55%, #f0f8ff 100%);
+    --hero-node: #0b5ea8;
+    --hero-trace: #1a7abf;
+    --hero-trace-op: 0.45;
+    --overlay-from: rgba(255,255,255,0.95);
+    --overlay-via: rgba(255,255,255,0.70);
+    --btn-outline-border: #111827;
+    --btn-outline-text: #111827;
+    --toggle-bg: #ffffff;
+    --toggle-border: #e5e7eb;
+    --toggle-text: #374151;
+    --toggle-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --feat-card-from: #ffffff;
+    --feat-card-to: #ffffff;
+    --feat-card-border: #f3f4f6;
+    --feat-inner-from: #f9fafb;
+    --feat-inner-to: #f3f4f6;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-cyan: 0 10px 25px -5px rgba(0,165,220,0.3), 0 8px 10px -6px rgba(0,165,220,0.2);
+    --transition: 0.3s ease;
+    --radius: 14px;
+    --font: 'Poppins', sans-serif;
+    font-family: var(--font);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: var(--bg);
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+.cytron-md-page.dark-theme {
+    --bg: #0a1220;
+    --bg-alt: #0e1828;
+    --text: #e5e7eb;
+    --text-secondary: #9CA3AF;
+    --text-muted: #6B7280;
+    --card-bg: #111827;
+    --card-border: #2a3f5f;
+    --card-from: #141f33;
+    --card-to: #0d1626;
+    --badge-bg: #1f2937;
+    --badge-text: #d1d5db;
+    --hero-gradient: linear-gradient(135deg, #020a18 0%, #071428 55%, #0c1f3a 100%);
+    --hero-node: #ffffff;
+    --hero-trace: #a8d8f0;
+    --hero-trace-op: 0.55;
+    --overlay-from: rgba(17,24,39,0.95);
+    --overlay-via: rgba(17,24,39,0.70);
+    --btn-outline-border: #00A5DC;
+    --btn-outline-text: #00A5DC;
+    --toggle-bg: #1f2937;
+    --toggle-border: rgba(0,165,220,0.3);
+    --toggle-text: #00A5DC;
+    --toggle-shadow: 0 0 20px rgba(0,165,220,0.2);
+    --feat-card-from: #1a2942;
+    --feat-card-to: #0f1a2a;
+    --feat-card-border: #2a3f5f;
+    --feat-inner-from: #3a4a5e;
+    --feat-inner-to: #2a3a4e;
+    color: #e5e7eb;
+}
+
+.cytron-md-page *,
+.cytron-md-page *::before,
+.cytron-md-page *::after { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif !important; }
+.cytron-md-page img { max-width: 100%; height: auto; display: block; }
+.cytron-md-page a { text-decoration: none; color: inherit; }
+.cytron-md-page ul, .cytron-md-page ol { list-style: none; }
+.cytron-md-page button { font-family: 'Poppins', sans-serif !important; cursor: pointer; border: none; background: none; }
+
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.cytron-md-page .container { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+.cytron-md-page .section-separator { background: linear-gradient(90deg, transparent, rgba(0,165,220,0.3), transparent); height: 1px; margin: 0; }
+.cytron-md-page .accent-border-top { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,165,220,0.4), transparent); }
+.cytron-md-page .accent-border-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,165,220,0.4), transparent); }
+
+
+/* ============================================
+   THEME TOGGLE (hero top bar — in flow, never clipped by page overflow)
+   ============================================ */
+.cytron-md-page .hero-topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 20;
+}
+.cytron-md-page .theme-toggle {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    z-index: 20;
+    padding: 0.45rem 0.9rem; border-radius: 9999px;
+    background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.12);
+    color: #374151;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem; font-weight: 500; cursor: pointer;
+    font-family: 'Poppins', sans-serif !important;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.cytron-md-page .theme-toggle:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cytron-md-page .theme-toggle svg { width: 0.95rem; height: 0.95rem; flex-shrink: 0; }
+.cytron-md-page .theme-toggle .icon-sun { display: none; align-items: center; gap: 0.35rem; }
+.cytron-md-page .theme-toggle .icon-moon { display: inline-flex; align-items: center; gap: 0.35rem; }
+.cytron-md-page.dark-theme .theme-toggle { background: rgba(13,22,38,0.92); border-color: rgba(255,255,255,0.15); color: #e5e7eb; }
+.cytron-md-page.dark-theme .theme-toggle .icon-sun { display: inline-flex; }
+.cytron-md-page.dark-theme .theme-toggle .icon-moon { display: none; }
+
+
+/* ============================================
+   HERO
+   ============================================ */
+.cytron-md-page .hero {
+    padding: 2.5rem 0; position: relative;
+    min-height: 420px; overflow: hidden;
+    background: var(--hero-gradient);
+    transition: background 0.5s ease;
+}
+.cytron-md-page .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.cytron-md-page .hero-bg-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform-origin: 100% 100%;
+}
+.cytron-md-page .hero-content { position: relative; z-index: 10; max-width: 48rem; }
+.cytron-md-page .hero-label { color: var(--primary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 500; }
+.cytron-md-page .hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .hero h1 span { color: var(--primary); }
+.cytron-md-page .hero-subtitle { font-size: 1.125rem; margin-bottom: 2rem; line-height: 1.75; color: var(--text-secondary); max-width: 42rem; transition: color 0.5s ease; }
+.cytron-md-page .hero-cta {
+    display: inline-block; padding: 1rem 2rem;
+    background: var(--primary); color: #fff; border-radius: 9999px;
+    font-weight: 500; font-size: 1.125rem; text-align: center;
+    transition: all var(--transition);
+}
+.cytron-md-page .hero-cta:hover { background: var(--primary-dark); box-shadow: 0 0 20px var(--primary-glow); }
+
+/* Hero SVG trace lines - applied per path */
+.cytron-md-page .nt {
+    fill: none;
+    stroke: var(--hero-trace);
+    stroke-opacity: var(--hero-trace-op);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 800;
+    animation: md-trace-draw 4s ease-out infinite;
+}
+.cytron-md-page .nt-d0 { animation-delay: 0s; }
+.cytron-md-page .nt-d1 { animation-delay: 0.6s; }
+.cytron-md-page .nt-d2 { animation-delay: 1.2s; }
+.cytron-md-page .nt-d3 { animation-delay: 1.8s; }
+
+@keyframes md-trace-draw {
+    0%   { stroke-dashoffset: 800; opacity: 0; }
+    15%  { opacity: 1; }
+    70%  { stroke-dashoffset: 0; opacity: 1; }
+    85%  { opacity: 0.6; }
+    100% { stroke-dashoffset: 0; opacity: 0.6; }
+}
+
+/* Hero SVG nodes - applied per circle */
+.cytron-md-page .nn {
+    fill: var(--hero-node);
+    opacity: 0.25;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: md-node-pulse 2.6s ease-in-out infinite;
+}
+.cytron-md-page .nn-d0 { animation-delay: 0s; }
+.cytron-md-page .nn-d1 { animation-delay: 0.4s; }
+.cytron-md-page .nn-d2 { animation-delay: 0.8s; }
+.cytron-md-page .nn-d3 { animation-delay: 1.2s; }
+
+@keyframes md-node-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.85); }
+    45%      { opacity: 1;    transform: scale(1.2); }
+    55%      { opacity: 0.9;  transform: scale(1.1); }
+}
+
+
+/* ============================================
+   SECTION COMMON
+   ============================================ */
+.cytron-md-page .md-section {
+    padding: 5rem 0; position: relative; overflow: hidden;
+    transition: background 0.5s ease;
+}
+.cytron-md-page .md-section .bg-decor { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.cytron-md-page .md-section .bg-orb { position: absolute; border-radius: 9999px; filter: blur(48px); }
+.cytron-md-page .section-title { font-size: clamp(1.875rem, 4vw, 2.5rem); font-weight: 700; text-align: center; margin-bottom: 1rem; color: var(--primary); }
+.cytron-md-page .section-subtitle { text-align: center; margin-bottom: 3rem; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .badge-pill { display: inline-block; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; color: var(--primary); border: 1px solid rgba(0,165,220,0.2); background: rgba(0,165,220,0.1); margin-bottom: 1.5rem; }
+.cytron-md-page.dark-theme .badge-pill { background: rgba(0,165,220,0.2); border-color: rgba(0,165,220,0.3); }
+
+
+/* ============================================
+   PAIN SOLUTION CAROUSEL
+   ============================================ */
+.cytron-md-page .pain-section { background: var(--bg-alt); }
+.cytron-md-page.dark-theme .pain-section { background: linear-gradient(to bottom, #0a1220, #0e1828, #0c1524); }
+.cytron-md-page .pain-carousel {
+    position: relative; border-radius: 1rem; overflow: hidden;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    transition: all 0.5s ease;
+}
+.cytron-md-page.dark-theme .pain-carousel { border-color: rgba(0,165,220,0.3); box-shadow: 0 0 60px rgba(0,165,220,0.15); }
+.cytron-md-page .pain-viewport { position: relative; height: 400px; width: 100%; }
+.cytron-md-page .pain-slide {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; z-index: 0;
+    transition: opacity 1s ease-in-out;
+}
+.cytron-md-page .pain-slide.active { opacity: 1; z-index: 10; }
+.cytron-md-page .pain-slide-bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    transition: transform 6s ease-out;
+}
+.cytron-md-page .pain-slide.active .pain-slide-bg { transform: scale(1.03); }
+.cytron-md-page .pain-overlay-r { position: absolute; inset: 0; background: linear-gradient(to right, var(--overlay-from), var(--overlay-via), transparent); transition: background 0.5s ease; }
+.cytron-md-page .pain-overlay-t { position: absolute; inset: 0; background: linear-gradient(to top, rgba(255,255,255,0.6), transparent, rgba(255,255,255,0.4)); transition: background 0.5s ease; }
+.cytron-md-page.dark-theme .pain-overlay-t { background: linear-gradient(to top, rgba(17,24,39,0.6), transparent, rgba(17,24,39,0.4)); }
+.cytron-md-page .pain-slide-content { position: relative; z-index: 10; height: 100%; display: flex; align-items: center; padding: 2rem 3rem; }
+.cytron-md-page .pain-slide-inner { max-width: 32rem; }
+.cytron-md-page .pain-slide-label { color: var(--primary); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.75rem; font-weight: 600; }
+.cytron-md-page .pain-slide-title { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .pain-slide-desc { font-size: 1.125rem; line-height: 1.75; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .pain-dots { position: absolute; bottom: 1.5rem; left: 2rem; z-index: 20; display: flex; gap: 0.5rem; align-items: center; }
+.cytron-md-page .pain-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: var(--text-muted); transition: all 0.5s ease; cursor: pointer; border: none; }
+.cytron-md-page .pain-dot.active { width: 2rem; background: var(--primary); }
+
+
+/* ============================================
+   WHY CYTRON
+   ============================================ */
+.cytron-md-page .why-section { background: linear-gradient(to bottom right, #f2f9fb, #eef7fa, #f0f8fb); }
+.cytron-md-page.dark-theme .why-section { background: linear-gradient(to bottom right, #0c1524, #111d32, #0a1628); }
+.cytron-md-page .why-row { display: flex; flex-direction: column; align-items: center; gap: 2rem; margin-bottom: 4rem; }
+.cytron-md-page .why-row:last-child { margin-bottom: 0; }
+.cytron-md-page .why-img-wrap { width: 100%; position: relative; }
+.cytron-md-page .why-img-card {
+    position: relative; border-radius: 1.5rem; overflow: hidden; padding: 1.5rem;
+    background: linear-gradient(to bottom right, var(--feat-card-from), var(--feat-card-to));
+    border: 1px solid var(--feat-card-border);
+    transition: all 0.5s ease;
+}
+.cytron-md-page .why-img-card:hover { transform: translateY(-0.5rem); box-shadow: var(--shadow-cyan); }
+.cytron-md-page .why-img-inner {
+    border-radius: 1rem; padding: 1rem;
+    background: linear-gradient(to bottom right, var(--feat-inner-from), var(--feat-inner-to));
+}
+.cytron-md-page .why-img-inner img { width: 100%; height: 16rem; object-fit: contain; }
+.cytron-md-page .why-number {
+    position: absolute; top: -1rem; width: 4rem; height: 4rem;
+    background: var(--primary); border-radius: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1.5rem; font-weight: 700; z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,165,220,0.4);
+}
+.cytron-md-page .why-number.left { left: -1rem; }
+.cytron-md-page .why-number.right { right: -1rem; }
+.cytron-md-page .why-content { width: 100%; }
+.cytron-md-page .why-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 3.5rem; height: 3.5rem; border-radius: 1rem;
+    color: var(--primary); border: 1px solid rgba(0,165,220,0.2);
+    background: rgba(0,165,220,0.1); margin-bottom: 1.5rem;
+}
+.cytron-md-page.dark-theme .why-icon { background: rgba(0,165,220,0.2); border-color: rgba(0,165,220,0.3); }
+.cytron-md-page .why-icon svg { width: 2rem; height: 2rem; }
+.cytron-md-page .why-label { color: var(--primary); font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.cytron-md-page .why-title { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; margin-bottom: 1rem; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .why-desc { font-size: 1.125rem; line-height: 1.75; color: var(--text-secondary); margin-bottom: 1.5rem; transition: color 0.5s ease; }
+.cytron-md-page .why-accent { height: 4px; width: 5rem; background: linear-gradient(to right, var(--primary), rgba(0,165,220,0.3)); border-radius: 9999px; }
+.cytron-md-page .why-bottom-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1.5rem; border-radius: 9999px;
+    border: 1px solid rgba(0,165,220,0.2); background: rgba(0,165,220,0.05);
+    margin-top: 6rem; font-weight: 500; color: var(--text); transition: color 0.5s ease;
+}
+.cytron-md-page.dark-theme .why-bottom-badge { background: rgba(0,165,220,0.1); border-color: rgba(0,165,220,0.2); }
+.cytron-md-page .why-bottom-badge .pulse-dot { width: 0.5rem; height: 0.5rem; background: var(--primary); border-radius: 9999px; animation: md-pulse 2s ease-in-out infinite; }
+@keyframes md-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+
+/* ============================================
+   PRODUCT COMPARISON
+   ============================================ */
+.cytron-md-page .products-section { background: var(--bg-alt); }
+.cytron-md-page.dark-theme .products-section { background: linear-gradient(to bottom right, #0e1626, #101c30, #0a1420); }
+.cytron-md-page .product-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
+.cytron-md-page .product-card {
+    padding: 1.25rem 1.5rem; border-radius: var(--radius);
+    display: flex; flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    transition: all var(--transition);
+}
+.cytron-md-page .product-card:hover { transform: translateY(-0.5rem); box-shadow: var(--shadow-cyan); }
+.cytron-md-page.dark-theme .product-card {
+    background: linear-gradient(to bottom right, #141f33, #0d1626);
+    border-color: #2a3f5f;
+}
+.cytron-md-page.dark-theme .product-card:hover {
+    background: linear-gradient(to bottom right, #1a2940, #0f1c2c);
+}
+.cytron-md-page .product-img-wrap {
+    border-radius: var(--radius); height: 14rem; margin-bottom: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #fff; padding: 1rem;
+}
+.cytron-md-page.dark-theme .product-img-wrap { background: #fff; }
+.cytron-md-page .product-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.cytron-md-page .product-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #0B3A6A; }
+.cytron-md-page.dark-theme .product-name { color: var(--primary); }
+.cytron-md-page .product-specs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.875rem; }
+.cytron-md-page .product-spec { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; background: #f3f4f6; color: #374151; transition: all 0.5s ease; }
+.cytron-md-page.dark-theme .product-spec { background: #1f2937; color: #d1d5db; }
+.cytron-md-page .product-desc { margin-bottom: 1.25rem; flex-grow: 1; font-size: 0.9rem; color: #4B5563; line-height: 1.6; transition: color 0.5s ease; }
+.cytron-md-page.dark-theme .product-desc { color: #9CA3AF; }
+.cytron-md-page .product-btn {
+    display: block; width: 100%; padding: 0.5rem 1.5rem; text-align: center;
+    background: transparent; border: 2px solid #111827;
+    color: #111827; border-radius: var(--radius); font-weight: 500; font-size: 0.95rem;
+    transition: all var(--transition);
+}
+.cytron-md-page .product-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cytron-md-page.dark-theme .product-btn { border-color: var(--primary); color: var(--primary); }
+.cytron-md-page.dark-theme .product-btn:hover { background: var(--primary); color: #fff; }
+.cytron-md-page .products-more {
+    display: flex; justify-content: center; margin-top: 2.5rem;
+}
+.cytron-md-page .products-more a {
+    padding: 0.75rem 2rem; background: var(--primary); color: #fff;
+    border-radius: var(--radius); font-weight: 500; font-size: 1.125rem;
+    transition: all var(--transition);
+}
+.cytron-md-page .products-more a:hover { background: var(--primary-dark); box-shadow: 0 0 20px var(--primary-glow); }
+
+
+/* ============================================
+   USE CASES
+   ============================================ */
+.cytron-md-page .usecases-section { background: linear-gradient(to bottom right, #f3f9fb, #eff7fa, #f1f9fc); }
+.cytron-md-page.dark-theme .usecases-section { background: linear-gradient(to bottom right, #0b1422, #101e34, #0c1626); }
+.cytron-md-page .usecases-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.cytron-md-page .usecase-card {
+    padding: 1.5rem; border-radius: var(--radius); text-align: center;
+    background: linear-gradient(to bottom right, var(--card-from), var(--card-to));
+    border: 1px solid var(--card-border);
+    transition: all var(--transition); cursor: pointer;
+}
+.cytron-md-page .usecase-card:hover { transform: translateY(-0.25rem); box-shadow: var(--shadow-cyan); }
+.cytron-md-page .usecase-card h3 { font-weight: 600; margin-bottom: 0.5rem; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .usecase-card p { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.5s ease; }
+
+
+/* ============================================
+   STORIES SLIDER
+   ============================================ */
+.cytron-md-page .stories-section { background: var(--bg-alt); }
+.cytron-md-page.dark-theme .stories-section { background: linear-gradient(to bottom right, #0e1626, #101c30, #0a1420); }
+.cytron-md-page .stories-wrap { position: relative; max-width: 72rem; margin: 0 auto; }
+.cytron-md-page .stories-viewport { overflow: hidden; border-radius: var(--radius); }
+.cytron-md-page .stories-track { display: flex; transition: transform 0.5s ease-in-out; }
+.cytron-md-page .stories-slide {
+    min-width: 100%;
+    flex: 0 0 100%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+.cytron-md-page .story-card {
+    margin: 0 0.5rem;
+    padding: 1rem; border-radius: 1.25rem; overflow: hidden;
+    background: linear-gradient(to bottom right, var(--card-from), var(--card-to));
+    border: 1px solid var(--card-border);
+    transition: all 0.5s ease;
+}
+.cytron-md-page .story-inner { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+.cytron-md-page .story-image {
+    border-radius: var(--radius); width: 100%; height: 200px; flex-shrink: 0;
+    background-size: cover; background-position: center;
+    border: 1px solid var(--card-border);
+}
+.cytron-md-page.dark-theme .story-image { background-color: #2a3a4e; }
+.cytron-md-page .story-content { flex: 1; padding: 0.5rem 0; }
+.cytron-md-page .story-country { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--primary); }
+.cytron-md-page.dark-theme .story-country { color: var(--primary); }
+.cytron-md-page .story-text { margin-bottom: 0.75rem; line-height: 1.75; font-size: 1rem; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .story-outcome { font-size: 1rem; font-weight: 500; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .stories-nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    width: 2.5rem; height: 2.5rem; border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card-bg); border: 2px solid var(--btn-outline-border);
+    color: var(--btn-outline-text); box-shadow: var(--shadow-md);
+    transition: all var(--transition);
+}
+.cytron-md-page .stories-nav-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cytron-md-page .stories-nav-btn.prev { left: -1rem; }
+.cytron-md-page .stories-nav-btn.next { right: -1rem; }
+.cytron-md-page .stories-nav-btn svg { width: 1.25rem; height: 1.25rem; }
+.cytron-md-page .stories-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
+.cytron-md-page .stories-dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; background: var(--text-muted); transition: background var(--transition); cursor: pointer; border: none; }
+.cytron-md-page .stories-dot.active { background: var(--primary); }
+
+
+/* ============================================
+   TUTORIALS
+   ============================================ */
+.cytron-md-page .tutorials-section { background: linear-gradient(to top left, #f1f8fb, #edf6f9, #f2f9fc); }
+.cytron-md-page.dark-theme .tutorials-section { background: linear-gradient(to top left, #0b1422, #101e34, #0c1626); }
+.cytron-md-page .tutorials-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+.cytron-md-page .tutorials-title { font-size: clamp(1.875rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 1rem; color: var(--primary); }
+.cytron-md-page .tutorials-desc { font-size: 1.125rem; margin-bottom: 1.5rem; line-height: 2; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .tutorials-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+.cytron-md-page .tutorials-btn {
+    display: inline-block; padding: 0.75rem 1.5rem; text-align: center;
+    background: transparent; border: 2px solid var(--btn-outline-border);
+    color: var(--btn-outline-text); border-radius: var(--radius); font-weight: 500;
+    transition: all var(--transition);
+}
+.cytron-md-page .tutorials-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cytron-md-page .tutorials-cards { display: grid; gap: 1rem; }
+.cytron-md-page .tutorial-card {
+    padding: 1rem 1.25rem; border-radius: var(--radius);
+    background: linear-gradient(to bottom right, var(--card-from), var(--card-to));
+    border: 1px solid var(--card-border);
+    transition: all var(--transition); cursor: pointer;
+}
+.cytron-md-page .tutorial-card:hover { transform: translateX(0.25rem); box-shadow: var(--shadow-cyan); }
+.cytron-md-page .tutorial-card h3 { font-weight: 600; margin-bottom: 0.25rem; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .tutorial-card p { font-size: 0.875rem; color: var(--text-secondary); transition: color 0.5s ease; }
+
+
+/* ============================================
+   CUSTOMIZATION
+   ============================================ */
+.cytron-md-page .custom-section { background: var(--bg-alt); }
+.cytron-md-page.dark-theme .custom-section { background: linear-gradient(to bottom, #0a1220, #0e1828, #0c1524); }
+.cytron-md-page .custom-grid { display: flex; flex-direction: column; align-items: center; gap: 3rem; }
+.cytron-md-page .custom-img-wrap { width: 100%; position: relative; }
+.cytron-md-page .custom-img-card {
+    position: relative; border-radius: 1rem; padding: 1.5rem; overflow: hidden;
+    background: linear-gradient(to bottom right, var(--feat-card-from), var(--feat-card-to));
+    border: 1px solid var(--feat-card-border); box-shadow: var(--shadow-lg);
+    transition: all 0.5s ease;
+}
+.cytron-md-page .custom-img-card:hover { box-shadow: var(--shadow-cyan); }
+.cytron-md-page .custom-img-card img { width: 100%; border-radius: 0.75rem; transition: transform 0.5s ease; }
+.cytron-md-page .custom-img-card:hover img { transform: scale(1.02); }
+.cytron-md-page .custom-corner-tl { position: absolute; top: -1rem; left: -1rem; width: 6rem; height: 6rem; border-top: 4px solid rgba(0,165,220,0.4); border-left: 4px solid rgba(0,165,220,0.4); border-radius: 1.5rem 0 0 0; }
+.cytron-md-page .custom-corner-br { position: absolute; bottom: -1rem; right: -1rem; width: 6rem; height: 6rem; border-bottom: 4px solid rgba(0,165,220,0.4); border-right: 4px solid rgba(0,165,220,0.4); border-radius: 0 0 1.5rem 0; }
+.cytron-md-page .custom-content { width: 100%; text-align: center; }
+.cytron-md-page .custom-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--primary); margin-bottom: 1.5rem; }
+.cytron-md-page .custom-desc { font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .custom-cta-text { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .custom-cta-text span { color: var(--primary); }
+.cytron-md-page .custom-features { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; justify-content: center; }
+.cytron-md-page .custom-feature { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .custom-feature svg { width: 1.25rem; height: 1.25rem; color: var(--primary); }
+.cytron-md-page .custom-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 1rem 2rem; background: var(--primary); color: #fff;
+    border-radius: 9999px; font-weight: 600; font-size: 1.125rem;
+    transition: all var(--transition);
+}
+.cytron-md-page .custom-btn:hover { background: var(--primary-dark); box-shadow: 0 0 20px var(--primary-glow); }
+.cytron-md-page .custom-btn svg { width: 1.25rem; height: 1.25rem; transition: transform var(--transition); }
+.cytron-md-page .custom-btn:hover svg { transform: translateX(0.25rem); }
+
+
+/* ============================================
+   EMAIL CAPTURE
+   ============================================ */
+.cytron-md-page .email-section { padding: 6rem 0; position: relative; overflow: hidden; }
+.cytron-md-page .email-section .email-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom right, #e5f0ff, #f3f8ff, #ffffff);
+    transition: background 0.5s ease;
+}
+.cytron-md-page.dark-theme .email-section .email-bg { background: linear-gradient(to bottom right, #0a1628, #0d2140, #1a3a5c); }
+.cytron-md-page .email-card {
+    position: relative; border-radius: 1.5rem; padding: 2.5rem; overflow: hidden; text-align: center;
+    background: rgba(255,255,255,0.8); border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-lg); max-width: 56rem; margin: 0 auto;
+}
+.cytron-md-page.dark-theme .email-card { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+.cytron-md-page .email-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 5rem; height: 5rem; border-radius: 1rem;
+    background: rgba(0,165,220,0.2); color: var(--primary); margin-bottom: 2rem;
+}
+.cytron-md-page .email-icon svg { width: 2.5rem; height: 2.5rem; }
+.cytron-md-page .email-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1.5rem; color: var(--text); transition: color 0.5s ease; }
+.cytron-md-page .email-title span { color: var(--primary); }
+.cytron-md-page .email-subtitle { font-size: 1.25rem; margin-bottom: 2.5rem; max-width: 42rem; margin-left: auto; margin-right: auto; line-height: 1.75; color: var(--text-secondary); transition: color 0.5s ease; }
+.cytron-md-page .email-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 1.25rem 2.5rem; background: var(--primary); color: #fff;
+    border-radius: 9999px; font-weight: 600; font-size: 1.125rem;
+    transition: all var(--transition);
+}
+.cytron-md-page .email-btn:hover { background: var(--primary-dark); box-shadow: 0 0 30px var(--primary-glow); transform: scale(1.05); }
+.cytron-md-page .email-btn svg { width: 1.25rem; height: 1.25rem; transition: transform var(--transition); }
+.cytron-md-page .email-btn:hover svg { transform: translateX(0.25rem); }
+.cytron-md-page .email-badges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.5rem; font-size: 0.875rem; color: var(--text-muted); }
+.cytron-md-page .email-badge { display: flex; align-items: center; gap: 0.5rem; }
+.cytron-md-page .email-badge svg { width: 1.25rem; height: 1.25rem; color: var(--primary); }
+
+
+/* ============================================
+   FAQ
+   ============================================ */
+.cytron-md-page .faq-section { background: linear-gradient(to bottom right, #f2f9fb, #eef7fa, #f0f8fb); }
+.cytron-md-page.dark-theme .faq-section { background: linear-gradient(to bottom right, #0c1524, #111d32, #0a1628); }
+.cytron-md-page .faq-list { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+.cytron-md-page .faq-item {
+    border-radius: var(--radius); overflow: hidden;
+    background: linear-gradient(to bottom right, var(--card-from), var(--card-to));
+    border: 1px solid var(--card-border);
+    transition: all 0.5s ease;
+}
+.cytron-md-page .faq-trigger {
+    width: 100%; padding: 1rem 1.5rem; text-align: left;
+    display: flex; align-items: center; justify-content: between;
+    background: transparent; border: 2px solid var(--btn-outline-border);
+    border-radius: var(--radius); color: var(--text);
+    font-weight: 600; font-family: inherit; font-size: 1rem;
+    transition: all var(--transition); cursor: pointer;
+}
+.cytron-md-page .faq-trigger:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+.cytron-md-page .faq-trigger:hover .faq-chevron { color: #fff; }
+.cytron-md-page .faq-trigger-text { flex: 1; }
+.cytron-md-page .faq-chevron { width: 1.25rem; height: 1.25rem; flex-shrink: 0; color: var(--text-muted); transition: all var(--transition); }
+.cytron-md-page .faq-item.open .faq-chevron { transform: rotate(180deg); }
+.cytron-md-page .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+.cytron-md-page .faq-item.open .faq-answer { max-height: 300px; }
+.cytron-md-page .faq-answer-inner { padding: 1rem 1.5rem; color: var(--text-secondary); transition: color 0.5s ease; }
+
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.cytron-md-page .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.cytron-md-page .reveal.visible { opacity: 1; transform: translateY(0); }
+.cytron-md-page .stagger-1 { transition-delay: 0.1s; }
+.cytron-md-page .stagger-2 { transition-delay: 0.2s; }
+.cytron-md-page .stagger-3 { transition-delay: 0.3s; }
+.cytron-md-page .stagger-4 { transition-delay: 0.4s; }
+.cytron-md-page .stagger-5 { transition-delay: 0.5s; }
+.cytron-md-page .stagger-6 { transition-delay: 0.6s; }
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (min-width: 640px) {
+    .cytron-md-page .tutorials-btns { flex-direction: row; }
+}
+@media (min-width: 768px) {
+    .cytron-md-page .hero { padding: 4rem 0; min-height: 480px; }
+    .cytron-md-page .pain-viewport { height: 450px; }
+    .cytron-md-page .product-grid { grid-template-columns: repeat(3, 1fr); }
+    .cytron-md-page .product-img-wrap { height: 16rem; }
+    .cytron-md-page .product-name { font-size: 1.6rem; }
+    .cytron-md-page .story-inner { flex-direction: row; }
+    .cytron-md-page .story-image { width: 45%; height: 250px; }
+    .cytron-md-page .email-card { padding: 4rem; }
+    .cytron-md-page .stories-nav-btn.prev { left: -3rem; }
+    .cytron-md-page .stories-nav-btn.next { right: -3rem; }
+}
+@media (min-width: 1024px) {
+    .cytron-md-page .why-row { flex-direction: row; gap: 4rem; }
+    .cytron-md-page .why-row.reverse { flex-direction: row-reverse; }
+    .cytron-md-page .why-img-wrap { width: 50%; }
+    .cytron-md-page .why-content { width: 50%; }
+    .cytron-md-page .why-row.reverse .why-content { text-align: right; }
+    .cytron-md-page .why-row.reverse .why-accent { margin-left: auto; }
+    .cytron-md-page .usecases-grid { grid-template-columns: repeat(4, 1fr); }
+    .cytron-md-page .tutorials-grid { grid-template-columns: 1fr 1fr; }
+    .cytron-md-page .custom-grid { flex-direction: row; gap: 4rem; }
+    .cytron-md-page .custom-img-wrap { width: 50%; }
+    .cytron-md-page .custom-content { width: 50%; text-align: left; }
+    .cytron-md-page .custom-features { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cytron-md-page *, .cytron-md-page *::before, .cytron-md-page *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ============================================
+   MOBILE-ONLY OVERRIDES (force single-column UI)
+   Notes:
+   - This file is intentionally optimised for mobile view only.
+   - Desktop/tablet layouts are overridden to behave like a mobile layout.
+   ============================================ */
+
+/* -- Page wrapper -- */
+.cytron-md-page {
+    width: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* -- Container -- */
+.cytron-md-page .container {
+    max-width: 100% !important;
+    padding: 0 16px !important;
+}
+
+/* -- Sections -- */
+.cytron-md-page .md-section { padding: 48px 0 !important; }
+.cytron-md-page .section-title { font-size: 1.6rem !important; }
+.cytron-md-page .section-subtitle { font-size: 0.95rem !important; margin: 0 auto 28px !important; }
+
+/* -- Theme toggle: icon-only pill, stays inside padded hero (avoids overflow-x clip) -- */
+.cytron-md-page .hero-topbar {
+    margin-bottom: 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-right: max(0px, env(safe-area-inset-right, 0px)) !important;
+}
+.cytron-md-page .theme-toggle .theme-toggle-label { display: none !important; }
+.cytron-md-page .theme-toggle .icon-moon,
+.cytron-md-page .theme-toggle .icon-sun { gap: 0 !important; }
+.cytron-md-page .theme-toggle {
+    font-size: 0 !important;
+    line-height: 0 !important;
+    font-weight: 600 !important;
+    padding: 0.5rem !important;
+    gap: 0 !important;
+    min-width: 2.75rem !important;
+    min-height: 2.75rem !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12) !important;
+    flex-shrink: 0 !important;
+}
+.cytron-md-page .theme-toggle svg {
+    width: 1.125rem !important;
+    height: 1.125rem !important;
+}
+
+/* -- Hero -- */
+.cytron-md-page .hero { min-height: auto !important; padding: 2rem 0 2.75rem !important; }
+.cytron-md-page .hero h1 { font-size: 1.75rem !important; line-height: 1.3 !important; margin-bottom: 1rem !important; }
+.cytron-md-page .hero-subtitle { font-size: 1rem !important; margin-bottom: 1.5rem !important; line-height: 1.65 !important; }
+.cytron-md-page .hero-cta { font-size: 1rem !important; padding: 0.875rem 1.5rem !important; width: 100% !important; text-align: center !important; display: block !important; margin-top: 0.25rem !important; }
+/* Circuit art: contained in section, bottom-right, no bleed past hero edges */
+.cytron-md-page .hero-bg-svg {
+    width: 42% !important;
+    max-width: 200px !important;
+    height: auto !important;
+    max-height: 46% !important;
+    inset: auto !important;
+    right: 0 !important;
+    bottom: 6% !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 0.58 !important;
+}
+.cytron-md-page .hero-bg .nt {
+    stroke-width: 1 !important;
+    stroke-opacity: 0.38 !important;
+}
+.cytron-md-page .hero-bg .nn { opacity: 0.14 !important; }
+
+/* -- Pain/Solution carousel -- */
+.cytron-md-page .pain-viewport { height: 320px !important; }
+.cytron-md-page .pain-slide-content { padding: 1.25rem 1rem !important; }
+.cytron-md-page .pain-slide-title { font-size: 1.5rem !important; }
+.cytron-md-page .pain-slide-desc { font-size: 1rem !important; }
+
+/* -- Why Cytron -- */
+.cytron-md-page .why-row,
+.cytron-md-page .why-row.reverse { flex-direction: column !important; gap: 1.5rem !important; }
+.cytron-md-page .why-img-wrap,
+.cytron-md-page .why-content { width: 100% !important; }
+.cytron-md-page .why-row.reverse .why-content { text-align: left !important; }
+.cytron-md-page .why-row.reverse .why-accent { margin-left: 0 !important; }
+.cytron-md-page .why-img-card:hover { transform: none !important; }
+.cytron-md-page .why-bottom-badge { margin-top: 2.5rem !important; font-size: 0.85rem !important; }
+
+/* -- Product grid -- */
+.cytron-md-page .product-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+.cytron-md-page .product-card:hover { transform: none !important; box-shadow: none !important; }
+.cytron-md-page .product-img-wrap { height: 12rem !important; }
+.cytron-md-page .product-name { font-size: 1.25rem !important; }
+
+/* -- Use cases -- */
+.cytron-md-page .usecases-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+.cytron-md-page .usecase-card { padding: 1rem !important; }
+.cytron-md-page .usecase-card:hover { transform: none !important; }
+
+/* -- Stories slider -- */
+.cytron-md-page .stories-nav-btn.prev { left: 0 !important; }
+.cytron-md-page .stories-nav-btn.next { right: 0 !important; }
+.cytron-md-page .story-inner { flex-direction: column !important; }
+.cytron-md-page .story-image { width: 100% !important; height: 180px !important; }
+
+/* -- Tutorials -- */
+.cytron-md-page .tutorials-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+.cytron-md-page .tutorials-btns { flex-direction: column !important; gap: 10px !important; }
+.cytron-md-page .tutorials-btn { width: 100% !important; text-align: center !important; }
+
+/* -- Customisation -- */
+.cytron-md-page .custom-grid { flex-direction: column !important; gap: 2rem !important; }
+.cytron-md-page .custom-img-wrap,
+.cytron-md-page .custom-content { width: 100% !important; }
+.cytron-md-page .custom-content { text-align: center !important; max-width: 360px !important; margin: 0 auto !important; }
+.cytron-md-page .custom-features { justify-content: center !important; }
+.cytron-md-page .custom-section { padding: 2rem 0 !important; }
+.cytron-md-page .custom-img-card { padding: 0.875rem !important; }
+.cytron-md-page .custom-content .why-icon { margin-bottom: 0.85rem !important; width: 3rem !important; height: 3rem !important; }
+.cytron-md-page .custom-content .why-icon svg { width: 1.5rem !important; height: 1.5rem !important; }
+.cytron-md-page .custom-title { font-size: 1.95rem !important; margin-bottom: 0.75rem !important; line-height: 1.15 !important; }
+.cytron-md-page .custom-desc { font-size: 1rem !important; margin-bottom: 0.625rem !important; line-height: 1.4 !important; }
+.cytron-md-page .custom-cta-text { font-size: 1.85rem !important; margin-bottom: 1rem !important; line-height: 1.2 !important; }
+.cytron-md-page .custom-features { gap: 0.6rem 1rem !important; margin-bottom: 1.2rem !important; }
+.cytron-md-page .custom-feature { font-size: 0.95rem !important; line-height: 1.35 !important; }
+/* Compact CTA: centered pill, not full-bleed — matches email section */
+.cytron-md-page .custom-btn,
+.cytron-md-page .email-btn {
+    width: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    gap: 0.45rem !important;
+}
+.cytron-md-page .custom-btn svg,
+.cytron-md-page .email-btn svg {
+    width: 1.0625rem !important;
+    height: 1.0625rem !important;
+}
+
+/* -- Email capture -- */
+.cytron-md-page .email-section { padding: 3rem 0 !important; }
+.cytron-md-page .email-card { padding: 1.5rem !important; border-radius: 1rem !important; }
+.cytron-md-page .email-title { font-size: 1.6rem !important; }
+.cytron-md-page .email-subtitle { font-size: 1rem !important; margin-bottom: 1.75rem !important; }
+.cytron-md-page .email-badges { gap: 1rem !important; margin-top: 1.75rem !important; }
+.cytron-md-page .email-btn:hover { transform: none !important; }
+
+/* -- FAQ -- */
+.cytron-md-page .faq-trigger { padding: 0.875rem 1rem !important; font-size: 0.9rem !important; }
+.cytron-md-page .faq-answer-inner { padding: 0.75rem 1rem !important; font-size: 0.9rem !important; }
+</style>
+<!-- ============================================
+     HTML CONTENT
+     ============================================ -->
+<div class="cytron-md-page"><main> <!-- ============ HERO ============ -->
+<section class="hero">
+<div class="hero-bg"><svg aria-hidden="true" class="hero-bg-svg" preserveaspectratio="xMaxYMid meet" viewbox="0 0 1600 700"> <g> <!-- Top cluster --> <path class="nt nt-d0" d="M1600 90  L1480 90  L1440 130 L1360 130 L1320 90  L1200 90  L1140 150 L1020 150 L980  110 L860  110"></path> <path class="nt nt-d1" d="M1480 90  L1460 70  L1360 70  L1320 40  L1200 40"></path> <path class="nt nt-d2" d="M1360 130 L1340 160 L1240 160 L1200 130 L1100 130 L1060 160 L940  160"></path> <!-- Mid cluster --> <path class="nt nt-d1" d="M1600 280 L1500 280 L1460 240 L1360 240 L1320 280 L1220 280 L1180 240 L1080 240 L1040 280 L920  280 L880 240 L760 240"></path> <path class="nt nt-d2" d="M1500 280 L1480 320 L1400 320 L1360 360 L1260 360 L1220 320 L1120 320 L1080 360 L960  360"></path> <path class="nt nt-d3" d="M1360 240 L1340 200 L1240 200 L1200 240"></path> <!-- Bottom cluster --> <path class="nt nt-d2" d="M1600 490 L1520 490 L1480 450 L1380 450 L1340 490 L1240 490 L1200 450 L1100 450 L1060 490 L940 490 L900 530 L780 530"></path> <path class="nt nt-d0" d="M1480 450 L1460 410 L1360 410 L1320 450"></path> <path class="nt nt-d3" d="M1340 490 L1320 530 L1220 530 L1180 570 L1060 570 L1020 530 L900 530"></path> <!-- Big anchor nodes --> <circle class="nn nn-d0" cx="1200" cy="90" r="10"></circle> <circle class="nn nn-d2" cx="1020" cy="150" r="8"></circle> <circle class="nn nn-d1" cx="1360" cy="240" r="10"></circle> <circle class="nn nn-d3" cx="1080" cy="280" r="8"></circle> <circle class="nn nn-d2" cx="920" cy="280" r="9"></circle> <circle class="nn nn-d0" cx="1340" cy="490" r="10"></circle> <circle class="nn nn-d3" cx="1100" cy="450" r="8"></circle> <circle class="nn nn-d1" cx="940" cy="490" r="9"></circle> <!-- Medium nodes --> <circle class="nn nn-d1" cx="1440" cy="130" r="5"></circle> <circle class="nn nn-d3" cx="1320" cy="90" r="5"></circle> <circle class="nn nn-d2" cx="1460" cy="240" r="5"></circle> <circle class="nn nn-d0" cx="1220" cy="280" r="5"></circle> <circle class="nn nn-d2" cx="1380" cy="450" r="5"></circle> <circle class="nn nn-d1" cx="1240" cy="490" r="5"></circle> <circle class="nn nn-d0" cx="1480" cy="90" r="5"></circle> <circle class="nn nn-d3" cx="1140" cy="150" r="5"></circle> <circle class="nn nn-d2" cx="1500" cy="280" r="5"></circle> <circle class="nn nn-d1" cx="1520" cy="490" r="5"></circle> </g> </svg></div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="hero-topbar"><button aria-label="Switch theme" class="theme-toggle" type="button"><span class="icon-moon"> <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> <span aria-hidden="true" class="theme-toggle-label">Dark</span> </span> <span class="icon-sun"> <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> <span aria-hidden="true" class="theme-toggle-label">Light</span> </span></button></div>
+
+<div class="hero-content reveal">
+<h1>Motor Drives designed for<br />
+<span>Robotics Competition &amp; Industrial Use</span></h1>
+
+<p class="hero-subtitle">True continuous current, simplified wiring, and proven performance<br />
+Built for makers and engineers.</p>
+<a class="hero-cta" href="https://my.cytron.io/c-motor-driver#/cytron-m11/sort=p.number_sales/order=DESC/limit=20/minPrice=/maxPrice=/load_more=0" rel="noopener noreferrer" target="_blank">Find the Right Driver For Your Motor</a></div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ PAIN SOLUTION ============ -->
+
+<section class="md-section pain-section">
+<div class="bg-decor">
+<div class="bg-orb" style="top:0;left:25%;width:400px;height:400px;background:rgba(0,165,220,0.08)">&nbsp;</div>
+
+<div class="bg-orb" style="bottom:0;right:25%;width:300px;height:300px;background:rgba(0,165,220,0.05)">&nbsp;</div>
+</div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal" style="text-align:center;margin-bottom:3rem">
+<h2 class="section-title">Tired of drivers that <span style="color:var(--primary)">fail you</span>?</h2>
+
+<p class="section-subtitle">These common problems shouldn&#39;t hold back your projects</p>
+</div>
+
+<div class="pain-carousel reveal stagger-2">
+<div class="pain-viewport">
+<div class="pain-slide active" data-idx="0">
+<div class="pain-slide-bg" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/test/untitled-design-23.png);background-color:var(--card-bg)">&nbsp;</div>
+
+<div class="pain-overlay-r">&nbsp;</div>
+
+<div class="pain-overlay-t">&nbsp;</div>
+
+<div class="pain-slide-content">
+<div class="pain-slide-inner">
+<p class="pain-slide-label">Sound Familiar?</p>
+
+<h3 class="pain-slide-title">Overheating &amp; Breakdowns</h3>
+
+<p class="pain-slide-desc">Drivers that fail under load, causing delays and wasted components.</p>
+</div>
+</div>
+</div>
+
+<div class="pain-slide" data-idx="1">
+<div class="pain-slide-bg" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/test/untitled-design-20.png);background-color:var(--card-bg)">&nbsp;</div>
+
+<div class="pain-overlay-r">&nbsp;</div>
+
+<div class="pain-overlay-t">&nbsp;</div>
+
+<div class="pain-slide-content">
+<div class="pain-slide-inner">
+<p class="pain-slide-label">Sound Familiar?</p>
+
+<h3 class="pain-slide-title">Confusing Wiring</h3>
+
+<p class="pain-slide-desc">Complex setups that waste hours of valuable build time.</p>
+</div>
+</div>
+</div>
+
+<div class="pain-slide" data-idx="2">
+<div class="pain-slide-bg" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/test/untitled-design-22.png);background-color:var(--card-bg)">&nbsp;</div>
+
+<div class="pain-overlay-r">&nbsp;</div>
+
+<div class="pain-overlay-t">&nbsp;</div>
+
+<div class="pain-slide-content">
+<div class="pain-slide-inner">
+<p class="pain-slide-label">Sound Familiar?</p>
+
+<h3 class="pain-slide-title">Inflated Specs</h3>
+
+<p class="pain-slide-desc">Peak ratings that don&#39;t hold up in real-world use.</p>
+</div>
+</div>
+</div>
+
+<div class="pain-slide" data-idx="3">
+<div class="pain-slide-bg" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/test/untitled-design-21.png);background-color:var(--card-bg)">&nbsp;</div>
+
+<div class="pain-overlay-r">&nbsp;</div>
+
+<div class="pain-overlay-t">&nbsp;</div>
+
+<div class="pain-slide-content">
+<div class="pain-slide-inner">
+<p class="pain-slide-label">Sound Familiar?</p>
+
+<h3 class="pain-slide-title">No Support</h3>
+
+<p class="pain-slide-desc">Missing documentation when you need help the most.</p>
+</div>
+</div>
+</div>
+
+<div class="pain-dots"><button class="pain-dot active" data-slide="0"></button><button class="pain-dot" data-slide="1"></button><button class="pain-dot" data-slide="2"></button><button class="pain-dot" data-slide="3"></button></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ WHY CYTRON ============ -->
+
+<section class="md-section why-section" style="padding:6rem 0">
+<div class="accent-border-top">&nbsp;</div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal" style="margin-bottom:5rem;max-width:42rem"><span class="badge-pill">Why Choose Us</span>
+
+<h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:700;margin-bottom:1rem;color:var(--text);transition:color 0.5s ease">Why <span style="color:var(--primary)">Cytron</span> Motor Drivers</h2>
+
+<p style="font-size:1.125rem;color:var(--text-secondary);transition:color 0.5s ease">Engineered for reliability, designed for simplicity. Here&#39;s what sets us apart.</p>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:4rem"><!-- Panel 1 -->
+<div class="why-row reveal stagger-1">
+<div class="why-img-wrap">
+<div class="why-number left">01</div>
+
+<div class="why-img-card">
+<div class="why-img-inner"><img alt="True Current Rating" src="https://static.cytron.io/image/catalog/cms-block/new-md-page/fully-tested-true-current-rating-5.png" /></div>
+</div>
+</div>
+
+<div class="why-content">
+<div class="why-icon"><svg fill="none" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+
+<p class="why-label">No inflated specs</p>
+
+<h3 class="why-title">True Current Rating</h3>
+
+<p class="why-desc">Every motor driver is fully load tested with thermal imaging to ensure real world performance. What you see is what you get reliable continuous current you can count on.</p>
+
+<div class="why-accent">&nbsp;</div>
+</div>
+</div>
+<!-- Panel 2 -->
+
+<div class="why-row reverse reveal stagger-2">
+<div class="why-img-wrap">
+<div class="why-number right">02</div>
+
+<div class="why-img-card">
+<div class="why-img-inner"><img alt="Easy Diagnostics" src="https://static.cytron.io/image/catalog/cms-block/new-md-page/fully-tested-true-current-rating-6.png" /></div>
+</div>
+</div>
+
+<div class="why-content">
+<div class="why-icon"><svg fill="none" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+
+<p class="why-label">Quick troubleshooting</p>
+
+<h3 class="why-title">Easy Diagnostics</h3>
+
+<p class="why-desc">Built in test buttons and status LEDs let you verify connections and diagnose issues in seconds. Spend less time debugging and more time building.</p>
+
+<div class="why-accent">&nbsp;</div>
+</div>
+</div>
+<!-- Panel 3 -->
+
+<div class="why-row reveal stagger-3">
+<div class="why-img-wrap">
+<div class="why-number left">03</div>
+
+<div class="why-img-card">
+<div class="why-img-inner"><img alt="Built in Protection" src="https://static.cytron.io/image/catalog/cms-block/new-md-page/fully-tested-true-current-rating-7.png" /></div>
+</div>
+</div>
+
+<div class="why-content">
+<div class="why-icon"><svg fill="none" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+
+<p class="why-label">Peace of mind</p>
+
+<h3 class="why-title">Built in Protection</h3>
+
+<p class="why-desc">Select models feature overcurrent, thermal shutdown, and undervoltage lockout. Your motors and circuits stay safe even when things go wrong.</p>
+
+<div class="why-accent">&nbsp;</div>
+</div>
+</div>
+</div>
+
+<div class="reveal" style="text-align:center">
+<div class="why-bottom-badge"><span class="pulse-dot"></span> Trusted by manufacturers and competition teams worldwide</div>
+</div>
+</div>
+
+<div class="accent-border-bottom">&nbsp;</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ PRODUCT COMPARISON ============ -->
+
+<section class="md-section products-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal">
+<h2 class="section-title">Maker&#39;s Choice Motor Drivers</h2>
+
+<p class="section-subtitle">Find the perfect Motor Driver for your project</p>
+</div>
+
+<div class="product-grid">
+<div class="product-card reveal stagger-1">
+<div class="product-img-wrap"><img alt="MD13S" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/1.jpg" /></div>
+
+<h3 class="product-name">MD13S</h3>
+
+<div class="product-specs"><span class="product-spec">6 to 30V</span><span class="product-spec">13A continuous</span><span class="product-spec">1 channel</span></div>
+
+<p class="product-desc">Perfect for medium duty DC motor applications in robotics, DIY builds, and learning projects</p>
+<a class="product-btn" href="https://www.cytron.io/c-motor-driver/p-13a-6v-30v-dc-motor-driver" rel="noopener noreferrer" target="_blank">Shop MD13S</a></div>
+
+<div class="product-card reveal stagger-2">
+<div class="product-img-wrap"><img alt="MDDS30" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/2.jpg" /></div>
+
+<h3 class="product-name">MDDS30</h3>
+
+<div class="product-specs"><span class="product-spec">7 to 35V</span><span class="product-spec">30A continuous</span><span class="product-spec">2 channels</span></div>
+
+<p class="product-desc">Suitable for projects that require reliable and flexible control of two DC motors</p>
+<a class="product-btn" href="https://www.cytron.io/c-motor-driver/p-30amp-7v-35v-smartdrive-dc-motor-driver-2-channels" rel="noopener noreferrer" target="_blank">Shop MDDS30</a></div>
+
+<div class="product-card reveal stagger-3">
+<div class="product-img-wrap"><img alt="MD25HV" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/3.jpg" /></div>
+
+<h3 class="product-name">MD25HV</h3>
+
+<div class="product-specs"><span class="product-spec">7 to 58V</span><span class="product-spec">25A continuous</span><span class="product-spec">1 channel</span></div>
+
+<p class="product-desc">Ideal for driving large DC motors in high-power projects and automation system</p>
+<a class="product-btn" href="https://www.cytron.io/p-25amp-7v-58v-high-voltage-dc-motor-driver" rel="noopener noreferrer" target="_blank">Shop MD25HV</a></div>
+
+<div class="product-card reveal stagger-4">
+<div class="product-img-wrap"><img alt="MD10-POT" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/4.jpg" /></div>
+
+<h3 class="product-name">MD10-POT</h3>
+
+<div class="product-specs"><span class="product-spec">7 to 30V</span><span class="product-spec">10A continuous</span><span class="product-spec">1 channel</span></div>
+
+<p class="product-desc">Simple speed control with built-in potentiometer for quick testing and manual tuning</p>
+<a class="product-btn" href="https://www.cytron.io/p-10-amp-7v-30v-potentiometer-and-switch-control-dc-motor-driver" rel="noopener noreferrer" target="_blank">Shop MD10-POT</a></div>
+
+<div class="product-card reveal stagger-5">
+<div class="product-img-wrap"><img alt="MD30C" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/5.jpg" /></div>
+
+<h3 class="product-name">MD30C</h3>
+
+<div class="product-specs"><span class="product-spec">5 to 30V</span><span class="product-spec">30A continuous</span><span class="product-spec">1 channel</span></div>
+
+<p class="product-desc">High current single motor applications for robotics and automation</p>
+<a class="product-btn" href="https://www.cytron.io/p-30amp-5v-30v-dc-motor-driver" rel="noopener noreferrer" target="_blank">Shop MD30C</a></div>
+
+<div class="product-card reveal stagger-6">
+<div class="product-img-wrap"><img alt="MDD10A" src="https://static.cytron.io/image/catalog/information/motor-driver-landing-page/6.jpg" /></div>
+
+<h3 class="product-name">MDD10A</h3>
+
+<div class="product-specs"><span class="product-spec">7 to 30V</span><span class="product-spec">10A continuous</span><span class="product-spec">2 channels</span></div>
+
+<p class="product-desc">Dual channel driver for differential drive robots and mobile platforms</p>
+<a class="product-btn" href="https://www.cytron.io/p-10amp-5v-30v-dc-motor-driver-2-channels" rel="noopener noreferrer" target="_blank">Shop MDD10A</a></div>
+</div>
+
+<div class="products-more reveal"><a href="https://my.cytron.io/c-motor-driver#/cytron-m11/sort=p.number_sales/order=DESC/limit=20/minPrice=/maxPrice=/load_more=0" rel="noopener noreferrer" target="_blank">Explore More</a></div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ USE CASES ============ -->
+
+<section class="md-section usecases-section">
+<div class="accent-border-top">&nbsp;</div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal">
+<h2 class="section-title">Our Motor Drivers Are Used For</h2>
+
+<p class="section-subtitle">&nbsp;</p>
+</div>
+
+<div class="usecases-grid">
+<div class="usecase-card reveal stagger-1">
+<h3>Robotics &amp; DIY</h3>
+
+<p>Precise control for hobby robots</p>
+</div>
+
+<div class="usecase-card reveal stagger-2">
+<h3>Automation &amp; Machinery</h3>
+
+<p>Reliable industrial automation</p>
+</div>
+
+<div class="usecase-card reveal stagger-3">
+<h3>RC &amp; Mobile Platforms</h3>
+
+<p>Smooth movement control</p>
+</div>
+
+<div class="usecase-card reveal stagger-4">
+<h3>Education Labs</h3>
+
+<p>Safe learning environments</p>
+</div>
+
+<div class="usecase-card reveal stagger-1">
+<h3>Prototyping &amp; R&amp;D</h3>
+
+<p>Fast iteration and testing</p>
+</div>
+
+<div class="usecase-card reveal stagger-2">
+<h3>Industrial Systems</h3>
+
+<p>Production grade reliability</p>
+</div>
+
+<div class="usecase-card reveal stagger-3">
+<h3>IoT &amp; Smart Devices</h3>
+
+<p>Connected motor control</p>
+</div>
+
+<div class="usecase-card reveal stagger-4">
+<h3>Competitions</h3>
+
+<p>Competition proven performance</p>
+</div>
+</div>
+</div>
+
+<div class="accent-border-bottom">&nbsp;</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ STORIES SLIDER ============ -->
+
+<section class="md-section stories-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal">
+<h2 class="section-title">Trusted Worldwide</h2>
+
+<p class="section-subtitle">Real stories from makers and builders</p>
+</div>
+
+<div class="stories-wrap reveal stagger-2"><button aria-label="Previous slide" class="stories-nav-btn prev"><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button><button aria-label="Next slide" class="stories-nav-btn next"><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="stories-viewport">
+<div class="stories-track">
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/south-africa-1.png)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">South Africa</div>
+
+<p class="story-text">MD13S motor driver powers a solar panel cleaning robot, delivering efficient motor control in a compact, cost-effective design.</p>
+
+<div class="story-outcome">Supports reliable solar panel cleaning operations</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/bangladesh-1.jpg)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">Bangladesh</div>
+
+<p class="story-text">MDDS10 &amp; MDDS30 drivers powered a university rover, delivering high power &amp; durability for tough competition conditions.</p>
+
+<div class="story-outcome">Won a Mars Rover competition</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/malaysia-min-11zon.png)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">Malaysia</div>
+
+<p class="story-text">MDDS60 motor driver powered a student-built combat robot, delivering continuous high current with built-in protection.</p>
+
+<div class="story-outcome">Won a robotics competition</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/phillippines-min-1-11zon.png)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">Philippines</div>
+
+<p class="story-text">URC10 motor controller powers student-built Sumo Robots, helping teams gain hands-on robotics experience in competitions.</p>
+
+<div class="story-outcome">Popular choice among student teams</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/canada-1.png)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">Canada</div>
+
+<p class="story-text">MDDS60 motor driver powers a snow cleaning machine, delivering high current and reliable control in harsh winter conditions.</p>
+
+<div class="story-outcome">Ensures stable operation in cold environments</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-slide">
+<div class="story-card">
+<div class="story-inner">
+<div class="story-image" style="background-image:url(https://static.cytron.io/image/catalog/cms-block/motor-driver-page/ireland-1.png)">&nbsp;</div>
+
+<div class="story-content">
+<div class="story-country">Ireland</div>
+
+<p class="story-text">MD20A motor driver powers a beverage pouring system, delivering precise motion and consistent operation for automation.</p>
+
+<div class="story-outcome">Ensures reliable and accurate pouring</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="stories-dots"><button class="stories-dot active" data-slide="0"></button><button class="stories-dot" data-slide="1"></button><button class="stories-dot" data-slide="2"></button><button class="stories-dot" data-slide="3"></button><button class="stories-dot" data-slide="4"></button><button class="stories-dot" data-slide="5"></button></div>
+</div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ TUTORIALS ============ -->
+
+<section class="md-section tutorials-section">
+<div class="accent-border-top">&nbsp;</div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="tutorials-grid reveal">
+<div>
+<h2 class="tutorials-title">Tutorials &amp; Support</h2>
+
+<p class="tutorials-desc">We believe in real support. Every driver comes with comprehensive guides, code examples, and an active community ready to help.</p>
+
+<div class="tutorials-btns"><a class="tutorials-btn" href="https://www.cytron.io/tutorial-search?categories=8&amp;include_content=true" rel="noopener noreferrer" target="_blank">Explore Tutorials</a> <a class="tutorials-btn" href="https://www.youtube.com/@cytrontech" rel="noopener noreferrer" target="_blank">Learn From Video</a></div>
+</div>
+
+<div class="tutorials-cards">
+<div class="tutorial-card">
+<h3>Getting Started</h3>
+
+<p>Quick setup guides</p>
+</div>
+
+<div class="tutorial-card">
+<h3>Wiring Guides</h3>
+
+<p>Step-by-step connections</p>
+</div>
+
+<div class="tutorial-card">
+<h3>Troubleshooting</h3>
+
+<p>Common issues solved</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accent-border-bottom">&nbsp;</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ CUSTOMIZATION ============ -->
+
+<section class="md-section custom-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="custom-grid reveal">
+<div class="custom-img-wrap">
+<div style="position:relative">
+<div class="custom-corner-tl">&nbsp;</div>
+
+<div class="custom-corner-br">&nbsp;</div>
+
+<div class="custom-img-card"><img alt="Cytron Custom Motor Drivers" src="https://static.cytron.io/image/catalog/cms-block/motor-driver-new/thursday-tales-image-template-3.png" /></div>
+</div>
+</div>
+
+<div class="custom-content">
+<div class="why-icon"><svg fill="none" stroke="currentColor" style="width:2rem;height:2rem" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+
+<h2 class="custom-title">Customization Service</h2>
+
+<p class="custom-desc">Can&#39;t find the motor driver that suits your need?</p>
+
+<p class="custom-cta-text">Talk to us <span>NOW!</span></p>
+
+<div class="custom-features">
+<div class="custom-feature"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg><span>Custom Specifications</span></div>
+
+<div class="custom-feature"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg><span>OEM Solutions</span></div>
+
+<div class="custom-feature"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg><span>Bulk Orders</span></div>
+</div>
+<a class="custom-btn" href="https://www.cytron.io/agile-manufacturing#:~:text=Inquire%20about%20Our%20Services%20Now%3A" rel="noopener noreferrer" target="_blank">Learn More <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a></div>
+</div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ EMAIL CAPTURE ============ -->
+
+<section class="email-section">
+<div class="email-bg">&nbsp;</div>
+
+<div class="container" style="position:relative;z-index:10">
+<div class="reveal">
+<div class="email-card">
+<div class="email-icon"><svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></div>
+
+<h2 class="email-title">Stay in the <span>Loop</span></h2>
+
+<p class="email-subtitle">Get the latest updates on new motor drivers, tutorials, and exclusive insights delivered straight to your inbox.</p>
+<a class="email-btn" href="https://cytron.activehosted.com/f/38?tracking=emailtestlist&amp;utm_campaign=motor-driver-landing-page-international-email-list-tracking" rel="noopener noreferrer" target="_blank">Subscribe Now <svg fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a>
+
+<div class="email-badges">
+<div class="email-badge"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg><span>No Spam</span></div>
+
+<div class="email-badge"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path></svg><span>Privacy Protected</span></div>
+
+<div class="email-badge"><svg fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" fill-rule="evenodd"></path></svg><span>Unsubscribe Anytime</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="section-separator">&nbsp;</div>
+<!-- ============ FAQ ============ -->
+
+<section class="md-section faq-section">
+<div class="accent-border-top">&nbsp;</div>
+
+<div class="container" style="position:relative;z-index:10">
+<h2 class="section-title reveal">Frequently Asked Questions</h2>
+
+<div class="faq-list">
+<div class="faq-item reveal stagger-1"><button class="faq-trigger"><span class="faq-trigger-text">Do you ship internationally?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">Yes, we ship worldwide. Most orders arrive within 7 to 14 business days depending on your location. Tracking is provided for all international shipments.</div>
+</div>
+</div>
+
+<div class="faq-item reveal stagger-2"><button class="faq-trigger"><span class="faq-trigger-text">How do I choose the right continuous current rating?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">Check your motor&#39;s continuous current draw under normal load. Add 20 to 30% headroom for safety. Our ratings are true continuous current, not peak so you can rely on them for extended operation.</div>
+</div>
+</div>
+
+<div class="faq-item reveal stagger-3"><button class="faq-trigger"><span class="faq-trigger-text">What&#39;s the difference between peak and continuous current?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">Peak current is the maximum short-term current a driver can handle. Continuous current is what it can sustain indefinitely without overheating. We spec continuous current because that&#39;s what matters for real projects.</div>
+</div>
+</div>
+
+<div class="faq-item reveal stagger-4"><button class="faq-trigger"><span class="faq-trigger-text">What is your return policy?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">We offer 30 day returns on unused products in original packaging. If you receive a defective unit, we&#39;ll replace it immediately at no cost.</div>
+</div>
+</div>
+
+<div class="faq-item reveal stagger-5"><button class="faq-trigger"><span class="faq-trigger-text">Are Cytron drivers compatible with Arduino, Raspberry Pi, and other microcontrollers?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">Yes. All our drivers work with standard PWM signals from Arduino, Raspberry Pi, ESP32, STM32, and most other microcontrollers. We provide wiring diagrams and code examples for popular platforms.</div>
+</div>
+</div>
+
+<div class="faq-item reveal stagger-6"><button class="faq-trigger"><span class="faq-trigger-text">What kind of support do you provide?</span><svg class="faq-chevron" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+
+<div class="faq-answer">
+<div class="faq-answer-inner">We offer comprehensive tutorials, wiring guides, troubleshooting docs, and an active community forum. For technical issues, our support team responds within 24 hours.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="accent-border-bottom">&nbsp;</div>
+</section>
+</main></div>
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ --><script>
+(function() {
+    // Skip all frontend behavior when rendered inside OpenCart/Journal2 admin.
+    var isAdminEditor = /(?:^|[?&])route=/.test(window.location.search) ||
+        !!document.getElementById('column-left') ||
+        !!document.querySelector('.journal-modal');
+    if (isAdminEditor) return;
+
+    var page = document.querySelector('.cytron-md-page');
+    if (!page) return;
+
+    // Prevent accidental form submits when embedded in CMS/editor wrappers.
+    page.querySelectorAll('button:not([type])').forEach(function(btn) {
+        btn.setAttribute('type', 'button');
+    });
+
+    // ── Theme Toggle ──
+    var toggle = page.querySelector('.theme-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', function() {
+            page.classList.toggle('dark-theme');
+        });
+    }
+
+    // ── Pain Solution Carousel ──
+    var painSlides = page.querySelectorAll('.pain-slide');
+    var painDots = page.querySelectorAll('.pain-dot');
+    var painCurrent = 0;
+
+    function showPainSlide(idx) {
+        painSlides.forEach(function(s) { s.classList.remove('active'); });
+        painDots.forEach(function(d) { d.classList.remove('active'); });
+        painCurrent = idx;
+        if (painSlides[idx]) painSlides[idx].classList.add('active');
+        if (painDots[idx]) painDots[idx].classList.add('active');
+    }
+
+    if (painSlides.length > 0) {
+        setInterval(function() {
+            showPainSlide((painCurrent + 1) % painSlides.length);
+        }, 2800);
+
+        painDots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                showPainSlide(parseInt(this.getAttribute('data-slide')));
+            });
+        });
+    }
+
+    // ── Stories Slider ──
+    var storiesTrack = page.querySelector('.stories-track');
+    var storiesSlides = page.querySelectorAll('.stories-slide');
+    var storiesDots = page.querySelectorAll('.stories-dot');
+    var prevBtn = page.querySelector('.stories-nav-btn.prev');
+    var nextBtn = page.querySelector('.stories-nav-btn.next');
+    var storiesCurrent = 0;
+
+    function showStory(idx) {
+        storiesCurrent = idx;
+        if (storiesTrack) storiesTrack.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        storiesDots.forEach(function(d) { d.classList.remove('active'); });
+        if (storiesDots[idx]) storiesDots[idx].classList.add('active');
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+        showStory((storiesCurrent - 1 + storiesSlides.length) % storiesSlides.length);
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+        showStory((storiesCurrent + 1) % storiesSlides.length);
+    });
+    storiesDots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            showStory(parseInt(this.getAttribute('data-slide')));
+        });
+    });
+
+    // ── FAQ Accordion ──
+    var faqTriggers = page.querySelectorAll('.faq-trigger');
+    faqTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+            var item = this.closest('.faq-item');
+            var wasOpen = item.classList.contains('open');
+            page.querySelectorAll('.faq-item').forEach(function(fi) { fi.classList.remove('open'); });
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+
+    // ── Scroll Reveal ──
+    var reveals = page.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '-80px' });
+
+        reveals.forEach(function(el) { observer.observe(el); });
+    } else {
+        reveals.forEach(function(el) { el.classList.add('visible'); });
+    }
+
+})();
+</script>
